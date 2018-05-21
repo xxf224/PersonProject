@@ -1,0 +1,9 @@
+Button不响应玩家点击的可能原因：
+
+1. 挂载的Image图片没有勾选 Raycast Target 选项
+
+2. 被其他响应的层级挡住
+
+3. 挂载的脚本运行报错
+
+4. 包含的页面没有挂载Graphic Raycaster组件
