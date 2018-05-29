@@ -1,0 +1,33 @@
+1. 参加的议题：
+
+高端实时渲染技术：当游戏邂逅电影		cineMachine
+
+Unity Ads: 通过视频广告获取高质量用户	Ads (例子：疯狂动物园)
+
+Unity中优化的误区		
+
+optimization algorithm
+1. Gather performance data from your game
+2. Figure out what parts of game don't perform well
+3. Make a list of possible optimizations base your findings
+4. sort this list by win/time ratio
+5. Perform necessary optimizations
+
+例子：Vector3.one （各个手机平台 Unity版本下测试）
+
+Test Everything
+Don't bindly trust anyone
+Test data from the web on your platform
+Document the tests
+Retest with the new Unity version
+
+
+可寻址资产系统大和资源管理器解析
+
+详细介绍Scriptable Object的使用
+
+1. 配置文件（可视化）
+
+2. 数据驱动程序设计
+
+3. UnityEvent和ScripteObject相结合
