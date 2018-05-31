@@ -3,7 +3,7 @@
 1. 数据类型
 Number: JavaScript不区分整数和浮点数，统一用Number表示
 
-字符串：字符串是以单引号'或双引号"括起来的任意文本 （单引号和双引号等级，这在C/C++/C#中不一样）
+字符串：字符串是以单引号''或双引号""括起来的任意文本 （单引号和双引号等级，这在C/C++/C#中不一样）
 
 布尔值：
 
@@ -70,3 +70,64 @@ strict模式
 	splice 从指定的索引开始删除若干元素，然后再从该位置添加若干元素
 	concat 当前的Array和另一个Array连接起来，并返回一个新的Array
 	join 把当前Array的每个元素都用指定的字符串连接起来，然后返回连接后的字符串
+
+4. 对象
+	
+对象是一种无序的集合数据类型，它由若干键值对组成。
+用一个{...}表示一个对象，键值对以xxx: xxx形式申明，用,隔开。
+对象的所有属性都是字符串，属性对应的值可以是任意数据类型
+访问不存在的属性不报错，而是返回undefined；不存在的属性赋值，则会新增属性
+
+对象操作：
+	访问：对象.属性名，如果属性名不是有效变量，则对象['属性名']
+	删除：delete 对象.属性名
+	检测拥有某属性：'属性名' in 对象
+	判断属性自身拥有而非继承：对象.hasOwnProperty('属性名')
+
+5 条件判断
+if else if else
+
+6. 循环
+for 作用于数组
+for in 只作用于对象
+while do while
+
+7 Map和Set
+
+对象可以视为其他语言中的Map或Dictionary的数据结构，但有个小问题，就是键必须是字符串
+
+Map:
+	Map是一组键值对的结构，具有极快的查找速度
+	一个key只能对应一个value，所以，多次对一个key放入value，后面的值会把前面的值冲掉
+
+	初始化：(1) var m = new Map([['Michael', 95], ['Bob', 75], ['Tracy', 85]])；
+			(2) var m = new Map(); // 空Map
+				m.set('Michael', 95)
+	添加：map.set(键)
+	获取：map.get(键)
+	是否存在：map.has(键)
+	删除：map.delete(键)
+
+Set:
+	Set是一组key的集合，但不存储value，没有重复的key
+
+	初始化：(1) var s2 = new Set([1, 2, 3])
+			(2) var s1 = new Set()
+				s1.add(1)
+	添加：set.add(键)
+	删除：set.delete(键)
+
+	个人感觉：除了去掉重复的没啥用
+
+8 iterable
+
+遍历Array可以采用下标循环，遍历Map和Set就无法使用下标。ES6标准引入了新的iterable类型，Array、Map和Set都属于iterable类型。具有iterable类型的集合可以通过新的for of循环来遍历。
+
+for in循环由于历史遗留问题，它遍历的实际上是对象的属性名称。一个Array数组实际上也是一个对象，它的每个元素的索引被视为一个属性。手动给Array对象添加了额外的属性后(array.name = 'music'), for in会把额外的属性包含在内，但是Array数组的length不会包含！（所以for in只用于对象）
+for of:
+	for (var x of a) { ... }
+
+forEach: 
+	a.forEach(function (element, index, array) {} 数组
+	s.forEach(function (element, sameElement, set) {} Set
+	m.forEach(function (value, key, map) {} Map
