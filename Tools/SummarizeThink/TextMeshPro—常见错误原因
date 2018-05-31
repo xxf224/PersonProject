@@ -1,0 +1,17 @@
+1. Unity5.6.2p3(64-bit) + TextMeshPro-1.0.55.55.0b9
+
+TextMeshPro配置：
+Pugins/TextMeshPro-1.0.55.55.0b9 				Include Platforms (Editor)
+Pugins/Editor/TextMeshPro-1.0.55.55.0b9			Include Platforms (Editor)
+Pugins/Runtime DLL/TextMeshPro-1.0.55.55.0b9	(Any Platform) Exclude Platforms (Editor) (Standalone)
+
+打包正常
+
+升级到 Unity2017.4.1f1(64-bit) + TextMeshPro-1.0.55.55.0b9
+
+打包失败
+
+将
+Pugins/Runtime DLL/TextMeshPro-1.0.55.55.0b9	(Any Platform) Exclude Platforms (Editor) (Standalone)
+修改为
+Pugins/Runtime DLL/TextMeshPro-1.0.55.55.0b9	(Any Platform) Exclude Platforms (Editor)
