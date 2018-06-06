@@ -1,4 +1,6 @@
+=======================================
 快速入门
+=======================================
 
 1. 数据类型
 Number: JavaScript不区分整数和浮点数，统一用Number表示
@@ -131,3 +133,48 @@ forEach:
 	a.forEach(function (element, index, array) {} 数组
 	s.forEach(function (element, sameElement, set) {} Set
 	m.forEach(function (value, key, map) {} Map
+
+=======================================
+函数
+=======================================
+
+1.函数的定义和调用
+函数的定义有两种方式：
+	(1) function abs(x) {
+		    if (x >= 0) {
+		        return x;
+		    } else {
+		        return -x;
+		    }
+		}
+	(2) JavaScript的函数也是一个对象，function(x) {...}是一个匿名函数，赋值给变量abs，通过abs就可以调用函数
+		var abs = function (x) {
+		    if (x >= 0) {
+		        return x;
+		    } else {
+		        return -x;
+		    }
+		};
+
+调用函数: abs(paraments)
+	JavaScript允许传入任意个参数而不影响调用，因此传入的参数比定义的参数多也没有问题，传入的参数比定义的少也没有问题
+
+arguments关键字：只在函数内部起作用，永远指向当前函数的调用者传入的所有参数
+	function abs() {
+	    if (arguments.length === 0) {
+	        return 0;
+	    }
+	    var x = arguments[0];
+	    return x >= 0 ? x : -x;
+	}
+
+rest关键字：ES6标准引入，只能写在最后，前面用...标识（不就是可变参数吗），如果传入的参数连正常定义的参数都没填满，rest参数会接收一个空数组
+
+注意：JavaScript引擎有一个在行末自动添加分号，return语句拆成2行会有坑
+	return
+        { name: 'foo' };
+    结果返回的值undefined，等价于
+    return;
+    	{ name: 'foo' };
+
+2.变量作用域与解构赋值
