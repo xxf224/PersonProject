@@ -178,3 +178,111 @@ rest关键字：ES6标准引入，只能写在最后，前面用...标识（不�
     	{ name: 'foo' };
 
 2.变量作用域与解构赋值
+
+变量提升：函数定义有个特点，它会先扫描整个函数体的语句，把所有申明的变量“提升”到函数顶部（而赋值并不会“提升”）
+
+全局作用域：不在任何函数内定义的变量就具有全局作用域。实际上，JavaScript默认有一个全局对象window，全局作用域的变量实际上被绑定到window的一个属性
+
+名字空间：全局变量会绑定到window上，不同的JavaScript文件如果使用了相同的全局变量，或者定义了相同名字的顶层函数，都会造成命名冲突。
+		  把自己的代码全部放入名字空间中，会大大减少全局变量冲突的可能	
+		  	// 唯一的全局变量MYAPP:
+			var MYAPP = {};
+
+			// 其他变量:
+			MYAPP.name = 'myapp';
+			MYAPP.version = 1.0;
+			// 其他函数:
+			MYAPP.foo = function () {
+			    return 'foo';
+			};
+局部作用域：JavaScript的变量作用域实际上是函数内部，在for循环等语句块中是无法定义具有局部作用域的变量，这和C/C++/C#不一样
+			function foo() {
+			    for (var i=0; i<100; i++) {
+			        //
+			    	}
+			    i += 100; // 仍然可以引用变量i
+			}
+let: ES6引入，解决上一个的问题
+			var sum = 0;
+		    for (let i=0; i<100; i++) {
+		        sum += i;
+		    }
+		    // SyntaxError:
+		    i += 1
+
+常量：ES6引入，关键字const来定义常量，const与let都具有块级作用域
+			const PI = 3.14;
+
+解构赋值：ES6引入，同时对一组变量进行赋值，多个变量要用[...]括起来
+		数组：  var [x, y, z] = ['hello', 'JavaScript', 'ES6']
+		对象：  var person = {
+				    name: '小明',
+				    age: 20,
+				    gender: 'male',
+				    passport: 'G-12345678',
+				    school: 'No.4 middle school'
+				};
+				var {name, age, passport} = person
+		对象有嵌套：var person = {
+					    name: '小明',
+					    school: 'No.4 middle school',
+					    address: {
+					        city: 'Beijing',
+					        street: 'No.1 Road',
+					        zipcode: '100001'
+					    }
+					};
+					var {name, address:{city, zip}} = person;
+					结果：
+					name; // '小明'
+					city; // 'Beijing'
+					zip; // undefined, 因为属性名是zipcode而不是zip
+					address; // Uncaught ReferenceError: address is not defined（address不是变量，而是为了让city和zip获得嵌套的address对象的属性:）
+		变量名和属性名不一致：
+					var person = {
+					    name: '小明',
+					    age: 20,
+					    gender: 'male',
+					    passport: 'G-12345678',
+					    school: 'No.4 middle school'
+					};
+					// 把passport属性赋值给变量id:
+					let {name, passport:id} = person;
+		使用默认值，避免返回undefined：
+					var person = {
+					    name: '小明',
+					    age: 20,
+					    gender: 'male',
+					    passport: 'G-12345678'
+					};
+
+					// 如果person对象没有single属性，默认赋值为true:
+					var {name, single=true} = person;
+		变量已经被声明，再次赋值会报错：
+					// 声明变量:
+					var x, y;
+					// 解构赋值:
+					{x, y} = { name: '小明', x: 100, y: 200};
+					// 语法错误: Uncaught SyntaxError: Unexpected token =
+					// 正确的写法：
+					({x, y} = { name: '小明', x: 100, y: 200});
+		使用场景：
+			交换变量的值：[x, y] = [y, x]
+			快速获取当前页面的域名和路径：var {hostname:domain, pathname:path} = location;
+			传参：	function buildDate({year, month, day, hour=0, minute=0, second=0}) {}
+					buildDate({ year: 2017, month: 1, day: 1 })
+
+3.方法
+在一个对象中绑定函数，称为这个对象的方法（怎么像类了）
+	var xiaoming = {
+	    name: '小明',
+	    birth: 1990,
+	    age: function () {
+	        var y = new Date().getFullYear();
+	        return y - this.birth;
+	    }
+	};
+	xiaoming.age; // 函数部分
+	xiaoming.age(); // 28（2018-1990的值）
+
+	一个方法内部，this是一个特殊变量，它始终指向当前对象！所以，this.birth可以拿到xiaoming的birth属性。
